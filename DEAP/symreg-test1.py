@@ -1,3 +1,5 @@
+#! ~/IC-UERJ/environment/python3
+
 import operator
 import math
 import random
