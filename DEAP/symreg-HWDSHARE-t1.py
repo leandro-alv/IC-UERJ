@@ -81,7 +81,7 @@ def evalSymbReg(individual, smpa, smpb, smpc):
     n_sel = len(selectors)
     comb = sel_conb(n_sel) # n_sel * 2**n_sel
     n_comb = len(comb)
-    sqerrors = 0 if n_sel >= 1 else -1
+    total_hits = 0 if n_sel >= 1 else -1
     raif1, raif2 = 0, 0
 
     for i in range(n_comb): # n_comb * n_sel
@@ -96,11 +96,11 @@ def evalSymbReg(individual, smpa, smpb, smpc):
             elif result == f2(a,c):
                 raif2 += 1
             else:
-                sqerrors -= 1
-    sqerrors += (raif1 + raif2)
-    sqerrors = 4 * sqerrors if raif1 == raif2 else sqerrors
+                total_hits -= 1
+    total_hits += (raif1 + raif2)
+    total_hits = 4 * total_hits if raif1 == raif2 else total_hits
         
-    return sqerrors/n_comb, n_sel, individual.height
+    return total_hits/n_comb, n_sel, individual.height
 
 smpa = random.sample([float(x) for x in range(-10,10)], k=5)
 smpb = random.sample([float(x) for x in range(-10,10)], k=5)
