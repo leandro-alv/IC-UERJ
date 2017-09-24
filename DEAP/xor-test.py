@@ -35,13 +35,13 @@ for i in range(XOR_SIZE_M):
             inputs[i][j] = 0
 
     count_1s = inputs[i].count(1)
-    outputs[i] = 1 if (count_1s > 0) and (count_1s % 2 == 0) else 0
+    outputs[i] = 1 if (count_1s > 0) and (count_1s % 2 != 0) else 0
 
 pset = gp.PrimitiveSet("MAIN", XOR_ENTRIES, "IN")
 pset.addPrimitive(operator.xor, 2)
 
-creator.create("FitnessMin", base.Fitness, weights=(-1.0, -1.0))
-creator.create("Individual", gp.PrimitiveTree, fitness=creator.FitnessMin)
+creator.create("FitnessMaxMin", base.Fitness, weights=(1.0, -1.0))
+creator.create("Individual", gp.PrimitiveTree, fitness=creator.FitnessMaxMin)
 
 toolbox = base.Toolbox()
 toolbox.register("expr", gp.genFull, pset=pset, min_=2, max_=5)
@@ -78,6 +78,7 @@ def main():
     # Print graph
     print(str(hof[0]))
     print(hof[0].height)
+    print(hof[0].fitness.values)
 
     # Plot graph
     expr = hof[0]
