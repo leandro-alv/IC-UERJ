@@ -53,10 +53,12 @@ def neighbor(solution):
     spaces. There's a 50% probability of adding space in one of the
     parts of the solution.'''
 
-    if random.random() > 0.5:
+    fst_len = len(solution[0])
+    snd_len = len(solution[1])
+    if fst_len < snd_len:
         i = random.randint(0, len(solution[0])-1)
         solution[0] = solution[0][:i] + " " + solution[0][i:]
-    else:
+    elif fst_len > snd_len:
         i = random.randint(0, len(solution[1])-1)
         solution[1] = solution[1][:i] + " " + solution[1][i:]
 
