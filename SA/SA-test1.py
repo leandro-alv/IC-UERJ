@@ -6,8 +6,7 @@ EE = 2.71828
 
 
 def anneal(solution):
-    '''Core of the simulated annealing algorithm.'''
-
+    """Core of the simulated annealing algorithm."""
     old_cost = cost(solution)
     T = 1.0
     T_min = 0.00001
@@ -29,9 +28,9 @@ def anneal(solution):
 
 
 def cost(solution):
-    '''Calculates the cost of the solution using the weighted average between
-    operand/operator alignment and the max number of spaces.'''
-
+    """Calculates the cost of the solution using the weighted average between
+    operand/operator alignment and the max number of spaces.
+    """
     cost = 0
     alm_count = 0  # alignment operand/operator count
     fst_len = len(solution[0])
@@ -49,10 +48,10 @@ def cost(solution):
 
 
 def neighbor(solution):
-    '''Generates a new random solution based on a previous one by adding
+    """Generates a new random solution based on a previous one by adding
     spaces. There's a 50% probability of adding space in one of the
-    parts of the solution.'''
-
+    parts of the solution.
+    """
     fst_len = len(solution[0])
     snd_len = len(solution[1])
     if fst_len < snd_len:
@@ -66,23 +65,17 @@ def neighbor(solution):
 
 
 def acceptance_probability(old_cost, new_cost, T):
-    '''Calculates the acceptance probability which is the recommendation on
-    whether or not to jump to the new solution.'''
-
-    ap = EE * ((old_cost - new_cost) / T)
-    if ap > 1:
-        ap = 1.0
-    elif ap < 0:
-        ap = 0.0
+    """Calculates the acceptance probability which is the recommendation on
+    whether or not to jump to the new solution.
+    """
+    ap = EE * ((new_cost - old_cost) / T)
 
     return ap
 
 
 def main():
-
     init_solution = ["AABDC", "ABC"]
     best_solution = anneal(init_solution)
-    # best_solution = neighbor(init_solution)
 
     print(best_solution)
 
