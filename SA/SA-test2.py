@@ -99,9 +99,12 @@ def acceptance_probability(old_cost, new_cost, T):
 
 def main():
     init_solution = ["AABDC", "ABC", "AC"]
-    best_solution = anneal(init_solution)
+    best_solution, cost = anneal(init_solution)
 
-    print(best_solution)
+    print("Solution:")
+    for r in best_solution:
+        print("%s" % r)
+    print("Cost: %d" % cost)
 
 
 if __name__ == "__main__":
